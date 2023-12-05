@@ -1,4 +1,4 @@
-# Course Learning docker / docker-compose
+# Моя курсова робота на тему платіжна система, інернет банкінг
 
 ### (Nginx, MySQL, React, Symfony)
 
