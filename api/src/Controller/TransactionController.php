@@ -97,6 +97,8 @@ class TransactionController extends AbstractController
 
         $requestData = json_decode($request->getContent(), true);
 
+        $pinCode=intval($requestData['pinCode']);
+
         /** @var Transaction $transaction */
         $transaction = $this->denormalizer->denormalize($requestData, Transaction::class, "array");
 
@@ -118,6 +120,10 @@ class TransactionController extends AbstractController
         $currentCardRepository = $this->entityManager->getRepository(Card::class);
         /** @var Card|null $currentCard */
         $currentCard = $currentCardRepository->findOneBy(['cardNumber' => $transaction->getSenderCard()]);
+
+        if($currentCard->getPin() != $pinCode){
+            return new JsonResponse("Не вірний пін-код, спробуйте ще раз.", Response::HTTP_BAD_REQUEST);
+        }
 
         $receiverCard = $currentCardRepository->findOneBy(['cardNumber' => $transaction->getReceiverCard()]);
 

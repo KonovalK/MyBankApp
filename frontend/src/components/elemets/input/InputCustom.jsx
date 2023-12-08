@@ -1,14 +1,11 @@
 import { TextField } from "@mui/material";
-import React, {useEffect} from "react";
+import React from "react";
 
 const InputCustom = ({
   id = undefined, label = "",
   type = "", name = "",
   required = false, endAdornment = null, myValue, onChange
 }) => {
-  useEffect(() => {
-    console.log(myValue);
-  }, []);
 
   return (
     <TextField

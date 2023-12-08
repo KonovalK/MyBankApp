@@ -49,8 +49,8 @@ const CreateCardTemplatePage = () => {
                     navigate("/main");
                 }
             }).catch(error => {
-                // setError(error.response.data["hydra:description"]);
-                // setNotification({ ...notification, visible: true, type: "error", message: error.response.data["hydra:description"] });
+                setError(error.response.data);
+                setNotification({ ...notification, visible: true, type: "error", message: error.response.data});
             }).finally(() => setLoading(false));
         }
     };

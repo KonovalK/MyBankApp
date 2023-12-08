@@ -14,6 +14,7 @@ const CreateTransactionPage = () => {
     const [data, setData] = useState([{
         senderCard:null,
     }]);
+    const [pinCode, setPinCode] = useState(null);
     const [notification, setNotification] = useState({
         visible: false,
         type: "",
@@ -32,8 +33,8 @@ const CreateTransactionPage = () => {
     };
 
     const transactionRequest = () => {
-        if(data.senderCard){
-            console.log(data);
+
+        if(data.senderCard && data.pinCode && (data.pinCode.length===4)){
             setLoading(true);
             axios.post(`/api/post-transactions`, data, userAuthenticationConfig()).then(response => {
                 if (response.status === responseStatus.HTTP_CREATED) {
@@ -42,6 +43,7 @@ const CreateTransactionPage = () => {
             }).catch(error => {
                 setError(error.response.data);
                 setNotification({ ...notification, visible: true, type: "error", message: error.response.data });
+                setPinCode(null);
             }).finally(() => setLoading(false));
         }
     };
@@ -49,6 +51,13 @@ const CreateTransactionPage = () => {
     useEffect(() => {
         transactionRequest();
     }, [data]);
+
+    useEffect(() => {
+        setData(prevData => ({
+            ...prevData,
+            pinCode: pinCode,
+        }));
+    }, [pinCode]);
 
     useEffect(() => {
         loadCards();
@@ -71,6 +80,7 @@ const CreateTransactionPage = () => {
                 setData={setData}
                 loading={loading}
                 cards={cards}
+                setPinCode={setPinCode}
             />
         </>
     );

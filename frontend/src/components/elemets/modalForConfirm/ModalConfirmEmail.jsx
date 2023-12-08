@@ -16,7 +16,7 @@ const ModalConfirmEmail = ({ open, onClose, onNotMyEmail, setVereficationCode}) 
     <Modal open={open} onClose={onClose}>
       <div className="modal-container">
         <div className="modal-content">
-          <h2>Confirm Email</h2>
+          <h2>Підтвердження пошти</h2>
           <InputCustom id="confirmInput" name="confirmInput" label="Введіть код підтвердження з пошти" onChange={OnChangeVefificationInput}/>
           <Button variant="contained" color="inherit" onClick={onNotMyEmail}>
             Відміна

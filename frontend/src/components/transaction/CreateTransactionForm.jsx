@@ -8,9 +8,11 @@ import {
 } from "@mui/material";
 import InputCustom from "../elemets/input/InputCustom";
 import MenuItem from "@mui/material/MenuItem";
+import ModalConfirmPinCode from "../elemets/modalConfirmPinCode/ModalConfirmPinCode";
 
-const CreateTransactionForm = ({ setData, loading, cards}) => {
+const CreateTransactionForm = ({ setData, loading, cards, setPinCode}) => {
 
+    const [modalOpen, setModalOpen] = useState(false);
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -20,8 +22,12 @@ const CreateTransactionForm = ({ setData, loading, cards}) => {
             senderCard: event.target.senderCard.value,
             receiverCard: event.target.receiverCard.value
         };
-
         setData(data);
+        setModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
     };
     const [myBalance, setMyBalance]=useState(null);
 
@@ -94,6 +100,12 @@ const CreateTransactionForm = ({ setData, loading, cards}) => {
                     </Grid>
                 </Grid>
             </Box>
+            <ModalConfirmPinCode
+                open={modalOpen}
+                onClose={() => setModalOpen(false)}
+                onNot={handleCloseModal}
+                setPinCode={setPinCode}
+            />
         </>
     );
 };

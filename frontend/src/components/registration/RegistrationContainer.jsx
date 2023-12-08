@@ -67,8 +67,8 @@ const RegistrationContainer = () => {
               });
         }
       }).catch(error => {
-        setError(error.response.data.detail);
-        setNotification({ ...notification, visible: true, type: "error", message: error.response.data.detail });
+        setError(error.response.data);
+        setNotification({ ...notification, visible: true, type: "error", message: error.response.data });
       }).finally(() => setLoading(false));
     }
   };

@@ -21,33 +21,33 @@ class TransactionEntityListener
      */
     public function prePersist(Transaction $transaction, LifecycleEventArgs $eventArgs): void
     {
-        $sender = $transaction->getSender();
-        $receiver=$transaction->getreceiver();
-
-        $userSender = [
-            'userEmail' => $sender->getEmail(),
-            'name' => $sender->getName(),
-            'surName' => $sender->getSurname(),
-        ];
-
-        $userReceiver = [
-            'userEmail' => $receiver->getEmail(),
-            'name' => $receiver->getName(),
-            'surName' => $receiver->getSurname(),
-        ];
-
-        $transactionInfo = [
-            'from' => $sender->getName().' '.$sender->getSurname(),
-            'to' => $receiver->getName().' '.$receiver->getSurname(),
-            'summa' => $transaction->getSumma(),
-            'description' => $transaction->getDescription(),
-            'date' => $transaction->getDate(),
-        ];
-
-        //Send mail to Sender
-        $this->mailerService->SendMailFunc($userSender, $transactionInfo);
-
-        //Send mail to Receiver
-        $this->mailerService->SendMailFunc($userReceiver, $transactionInfo);
+//        $sender = $transaction->getSender();
+//        $receiver=$transaction->getreceiver();
+//
+//        $userSender = [
+//            'userEmail' => $sender->getEmail(),
+//            'name' => $sender->getName(),
+//            'surName' => $sender->getSurname(),
+//        ];
+//
+//        $userReceiver = [
+//            'userEmail' => $receiver->getEmail(),
+//            'name' => $receiver->getName(),
+//            'surName' => $receiver->getSurname(),
+//        ];
+//
+//        $transactionInfo = [
+//            'from' => $sender->getName().' '.$sender->getSurname(),
+//            'to' => $receiver->getName().' '.$receiver->getSurname(),
+//            'summa' => $transaction->getSumma(),
+//            'description' => $transaction->getDescription(),
+//            'date' => $transaction->getDate(),
+//        ];
+//
+//        //Send mail to Sender
+//        $this->mailerService->SendMailFunc($userSender, $transactionInfo);
+//
+//        //Send mail to Receiver
+//        $this->mailerService->SendMailFunc($userReceiver, $transactionInfo);
     }
 }
