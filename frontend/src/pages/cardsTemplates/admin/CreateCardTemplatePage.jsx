@@ -41,7 +41,7 @@ const CreateCardTemplatePage = () => {
     const TemplateRequest = () => {
         if(data.cardType && data.cardBackgroundPhoto && data.otherCardPropereties && data.bank){
             setLoading(true);
-            axios.post(`/api/card-templates`, data, userAuthenticationConfig()).then(response => {
+            axios.post(`/api/create-card-template`, data, userAuthenticationConfig()).then(response => {
                 if (response.status === responseStatus.HTTP_CREATED) {
                     data.cardType=null;
                     data.otherCardPropereties=null;
@@ -49,8 +49,8 @@ const CreateCardTemplatePage = () => {
                     navigate("/main");
                 }
             }).catch(error => {
-                setError(error.response.data);
-                setNotification({ ...notification, visible: true, type: "error", message: error.response.data});
+                // setError(error.response.data);
+                // setNotification({ ...notification, visible: true, type: "error", message: error.response.data});
             }).finally(() => setLoading(false));
         }
     };

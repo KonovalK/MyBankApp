@@ -8,12 +8,16 @@ class FirebaseStorageService
 {
     private Storage $storage;
 
-    public function __construct(Storage $storage)
+    public function __construct($firebaseCredentialsPath)
     {
-        $this->storage = $storage;
+        $factory = (new Factory())
+            ->withServiceAccount($firebaseCredentialsPath)
+            ->createStorage();
+
+        $this->storage = $factory;
     }
 
-    public function uploadFile($file, $destination)
+    public function uploadFile($file, $destination): string
     {
         $bucket = $this->storage->getBucket();
 

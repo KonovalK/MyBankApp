@@ -8,6 +8,7 @@ import {
 import InputCustom from "../../elemets/input/InputCustom";
 import MenuItem from "@mui/material/MenuItem";
 import SearchFilterSelect from "../../elemets/searchFilter/SearchFilterDefault";
+import PhotoUpload from "../../elemets/photoLoader/photoLoader";
 
 const CreateCardTemplateForm = ({ setData, loading, banks}) => {
 
@@ -20,11 +21,12 @@ const CreateCardTemplateForm = ({ setData, loading, banks}) => {
     const [selectBank, setSelectBank]=useState({
         bank: null,
     });
+    const [photo, setPhoto]=useState(null);
     const handleSubmit = (event) => {
         event.preventDefault();
 
         data.cardType = event.target.cardType.value;
-        //data.cardBackgroundPhoto = event.target.cardBackgroundPhoto.value;
+        data.cardBackgroundPhoto = photo;
         data.otherCardPropereties = event.target.otherCardPropereties.value;
         data.bank= "/api/banks/" + selectBank.bank;
         setData(data);
@@ -63,14 +65,7 @@ const CreateCardTemplateForm = ({ setData, loading, banks}) => {
                                     name="cardType"
                                     required
                                 />
-
-                                {/*<InputCustom*/}
-                                {/*    id="cardBackgroundPhoto"*/}
-                                {/*    type="text"*/}
-                                {/*    label="cardBackgroundPhoto"*/}
-                                {/*    name="cardBackgroundPhoto"*/}
-                                {/*    required*/}
-                                {/*/>*/}
+                                <PhotoUpload onFileSelect={setPhoto}/>
                                 <InputCustom
                                     id="otherCardPropereties"
                                     type="text"

@@ -66,14 +66,6 @@ class CardTemplateController extends AbstractController
 
         $imageFile = $request->files->get('image');
 
-        if (!($imageFile instanceof UploadedFile)) {
-            throw new UnprocessableEntityHttpException("Invalid or missing image file");
-        }
-
-        if ($imageFile->getMimeType() !== 'image/jpeg' && $imageFile->getMimeType() !== 'image/png') {
-            throw new UnprocessableEntityHttpException("Invalid image file type. Only JPEG and PNG are allowed.");
-        }
-
         $firebaseUrl = $this->firebaseStorageService->uploadFile($imageFile, 'card_templates');
 
         $cardTemplate->setCardBackgroundPhoto($firebaseUrl);

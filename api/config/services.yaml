@@ -46,8 +46,6 @@ services:
         tags:
             - { name: 'kernel.event_subscriber' }
 
-    Kreait\Firebase\Factory:
-        class: Kreait\Firebase\Factory
-        factory: [ 'Kreait\Firebase\Factory', 'createWithServiceAccount' ]
+    App\Services\FirebaseStorageService:
         arguments:
-            - '%firebase_credentials_path%'
+            $firebaseCredentialsPath: '%kernel.project_dir%/config/firebase/firebase.json'
